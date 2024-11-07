@@ -1,26 +1,108 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
 
 //create your first component
+
 const Home = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+    const url = 'https://playground.4geeks.com/todo/';
+    const [user, setUser] = useState('');
+	const [userData, setUserData] = useState([])
+	const [task, setTask] = useState ('')
+
+
+    const createUser = async (user) => {
+        try {
+            const resp = await fetch(url + 'users/' + user, {  
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+            if (!resp.ok) throw new Error('Not as expected');
+            const data = await resp.json();
+            console.log(data);
+		
+        } catch (error) {
+            console.error(error);
+        
+    	};
+	}
+
+	const createTask = async (user, task) => {
+        try {
+            const resp = await fetch(url + 'todos/' + user, {  
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+				body: JSON.stringify ({
+					"label": task,
+					"is_done": false
+				  }),
+            });
+            if (!resp.ok) throw new Error('Not as expected');
+            const data = await resp.json();
+            console.log(data);
+		
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+	const getData = async (user) => {
+        try {
+            const resp = await fetch(url + 'users/' + user);
+            if (!resp.ok) throw new Error('Not as expected');
+            const data = await resp.json();
+            console.log(data);
+			setUserData(data)
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createUser(user);  
+			getData(user)
+    }
+
+
+	return (	<>
+	<form onSubmit={handleSubmit}>
+		<input type="text" placeholder="Tipe user name" value={user} onChange={e => setUser(e.target.value)} required/>
+	</form>	
+		<div>
+			{user? <> <h1>Welcome {user}</h1> </>: ' '}
 		</div>
-	);
+	<form onSubmit={handleSubmit}>
+		<input type="text" placeholder="Tipe user name" value={task} onChange={e => setTask(e.target.value)} required/>
+	</form>	
+		<ul>
+            {userData.todos ? (
+              userData.todos.map((el) => (
+                <div className={el.is_done? 'taskDone myTasks' : 'myTasks'} key={el.id}>
+                  {el.label}
+                  <div>
+                  <span
+                    className="fa-solid fa-check done"
+                    //onClick={()=> handleDone(i)}
+                  ></span>
+                  <span
+                    className="fa-solid fa-xmark delete"
+                   // onClick={() => handleDelete(i)}
+                  ></span>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="noTasks">All done!</div>
+            )}
+          </ul>
+	
+
+	</>	);
 };
 
 export default Home;
