@@ -43,7 +43,6 @@ const Home = () => {
             console.error(error);
         }
     };
-
   
     const getData = async (user) => {
         try {
@@ -66,6 +65,21 @@ const Home = () => {
     const handleTaskSubmit = (e) => {
         e.preventDefault();
         createTask(user, task);
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            const resp = await fetch(url + 'todos/' + id, {
+                method: 'DELETE',
+            });
+            if (!resp.ok) throw new Error('Error al eliminar la tarea del servidor');
+            setUserData((prevData) => ({
+                ...prevData,
+                todos: prevData.todos.filter((task) => task.id !== id)
+            }));
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -94,9 +108,11 @@ const Home = () => {
                             <div>
                   <span
                     className="fa-solid fa-check done"
+                    
                   ></span>
                   <span
                     className="fa-solid fa-xmark delete"
+                    onClick={() => handleDelete(el.id)}
                   ></span>
                   </div>
                         </div>
