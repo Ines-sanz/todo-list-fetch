@@ -119,6 +119,25 @@ const Home = () => {
         </form>
 
         <div className="welcome">{user && <p>Welcome {user}</p>}</div>
+        <div className="leftTasks">
+          {(() => {
+            const leftTasks = userData.todos
+              ? userData.todos.filter((task) => !task.is_done).length
+              : 0;
+            if (leftTasks === 0) return null;
+            if (leftTasks === 1)
+              return (
+                <>
+                  <span className="nTask">{leftTasks}</span> task to do
+                </>
+              );
+            return (
+              <>
+                <span className="nTask">{leftTasks}</span> tasks to do
+              </>
+            );
+          })()}
+        </div>
         <div className="taskContainer">
           <form onSubmit={handleTaskSubmit}>
             <input
@@ -160,7 +179,14 @@ const Home = () => {
             )}
           </div>
           <div className="myButton">
-          <span class="fa-solid fa-plus" onClick={() => document.querySelector(".taskInput").classList.toggle('taskInputFocus')}></span>
+            <span
+              class="fa-solid fa-plus"
+              onClick={() =>
+                document
+                  .querySelector(".taskInput")
+                  .classList.toggle("taskInputFocus")
+              }
+            ></span>
           </div>
         </div>
       </div>

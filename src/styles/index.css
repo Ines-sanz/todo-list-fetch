@@ -30,7 +30,7 @@ padding-top: 10px;
   color:rgba(255, 255, 255, 0.757);
 border: none;
 font-family: inherit;
-font-size:12px;
+font-size:16px;
 margin: 8px;
 }
 
@@ -69,6 +69,7 @@ margin-bottom: 4px;
 
 
 .welcome{
+  margin-bottom: 0;
   text-transform: uppercase;
   font-size: 1.6rem ;
   letter-spacing: 2px;
@@ -80,7 +81,7 @@ margin-bottom: 4px;
   height: auto;
   background-color:white;
   border-radius: 30px 30px 30px 30px;
-  margin-bottom: -5pxpx;
+  margin-bottom: -5px;
   padding-bottom: 24px;
   position: relative;
 }
@@ -135,4 +136,26 @@ margin-bottom: 4px;
     border-radius: 30px;
     line-height: 2rem;
     background-color: #3033d0;
+  }
+
+  .nTask{
+    color: #3033d0;
+    height: 30px;
+    width: 25px;
+    background-color: white;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+    margin-right: 5px;
+  }
+
+  .leftTasks{
+    display: flex;
+    align-items: start;
+    margin-left: 5%;
+    color: white;
+    font-size: 18px;
+    font-family: inherit;
+    margin-bottom: 5px;
   }
