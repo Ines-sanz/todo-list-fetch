@@ -1,29 +1,113 @@
-.myUl{
-    width: 50%;
-    margin: auto;
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+body{
+  width: 100vw;
+margin: 0;
+padding: 0;
+background-color:  #f1f1f1;
+font-family: "Raleway", sans-serif;
+
 }
 
+.myContainer{
+  width:100vw;
+padding-top: 10vh;
+  display: flex;
+justify-content: center;
+}
+.myCard{
+min-height: 200px;
+background-color:#3033d0;
+border-radius: 30px;
+text-align: center;
+padding-top: 10px;
+
+}
+
+.userInput{
+  background-color: transparent;
+  text-align: center;
+  color:rgba(255, 255, 255, 0.757);
+border: none;
+font-family: inherit;
+font-size:12px;
+margin: 8px;
+}
+
+.userInput:focus{
+  background-color: #2224b3;
+  border-radius:10px;
+  text-align: center;
+  outline:none;
+border: none;
+font-family: inherit;
+font-size:22px;
+margin: 8px;
+}
+
+.taskInput{
+  width: 60%;
+  background-color: transparent;
+  text-align: center;
+  color:#2224b3;
+border: none;
+font-family: inherit;
+font-size:12px;
+margin: 8px;
+}
+
+.taskInput:focus{
+  width: 60%;
+  background-color: #f1f1f1;
+  text-align: center;
+  color:black;
+  outline:none;
+  border-radius:10px;
+font-size:16px;
+margin: 8px;
+}
+
+.welcome{
+  text-transform: uppercase;
+  font-size: 1.6rem ;
+  letter-spacing: 2px;
+  color: white;}
+
+.taskContainer{
+  min-height: 200px;
+  background-color:white;
+  border-radius: 30px 30px 30px 30px;
+  margin-bottom: 0px;
+}
+.myUl{
+  width:100%;
+  margin: 0px;
+}
 .myTasks {
+  width: 90%; 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px 0px;
+   background-color: #f1f1f18c;
+   border-radius: 10px;
     font-size: 22px;
     padding: 5px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin:auto;
+    margin-top: 5px;
   }
+
   .taskDone{
-   text-decoration: line-through #fadd8b;
+   background-color: rgba(196, 240, 176, 0.4);
   }
-  
+
   .delete, .done{
-    margin-left: 2px;
+    margin-left: 4px;
+    color:#ffffff;
   }
   
-  .done:hover{
+  .done:hover {
     transform: scale(1.1);
-    color: #fadd8b;
+    color: #3033d0;
   }
   
   .delete:hover{

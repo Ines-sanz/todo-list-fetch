@@ -5,7 +5,7 @@ const Home = () => {
     const [user, setUser] = useState('');
     const [userData, setUserData] = useState([]);
     const [task, setTask] = useState('');
-    const myUser = ''
+
     const createUser = async (user) => {
         try {
             const resp = await fetch(url + 'users/' + user, {
@@ -63,8 +63,9 @@ const Home = () => {
 
    
     const handleTaskSubmit = (e) => {
-        e.preventDefault();
-        createTask(user, task);
+        e.preventDefault(); 
+        user? createTask(user, task) : alert('User required');
+        
     };
 
     const handleDelete = async (id) => {
@@ -100,32 +101,35 @@ const Home = () => {
             console.error(error);
         }
     };
+    
+    useEffect(() => {
+        document.querySelector('.userInput').focus(); 
+    }, []);
 
     return (
         <div className="myContainer">
-         
+         <div className="myCard col-10 col-sm-8 col-md-6 col-lg-4">
             <form onSubmit={handleUserSubmit}>
-                <input type="text" placeholder="Type user name" value={user} onChange={e => setUser(e.target.value)} required />
+                <input className="userInput" type="text" placeholder="Type user name" value={user} onLoad={focus} onChange={e => setUser(e.target.value)} required />
             </form>
 
-            <div>
-                {user && <h1>Welcome {user}</h1>}
+            <div className="welcome">
+                {user && <p>Welcome {user}</p>}
             </div>
-
+<div className="taskContainer">
             <form onSubmit={handleTaskSubmit}>
-                <input type="text" placeholder="What needs to be done?" value={task} onChange={e => setTask(e.target.value)} required />
-                <button type="submit">Add Task</button>
+                <input className="taskInput" type="text" placeholder="What needs to be done?" value={task} onChange={e => setTask(e.target.value)} required />
             </form>
 
            
-            <ul className="myUl">
+            <div>
                 {userData.todos ? (
                     userData.todos.map((el) => (
                         <div className={el.is_done? 'taskDone myTasks' : 'myTasks'} key={el.id}>
                             {el.label}
                             <div>
                   <span
-                    className="fa-solid fa-check done"
+                  className={el.is_done? 'fa-solid fa-check doneIsDone' : 'fa-solid fa-check done'}
                     onClick={() => handleDone(el)}
                   ></span>
                   <span
@@ -138,8 +142,10 @@ const Home = () => {
                 ) : (
                     <div className="noTasks">All done!</div>
                 )}
-            </ul>
-        </div>
+            </div>
+            </div>
+            </div>
+    </div>
     );
 };
 
