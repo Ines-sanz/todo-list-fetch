@@ -86,11 +86,19 @@ const Home = () => {
             </form>
 
            
-            <ul>
+            <ul className="myUl">
                 {userData.todos ? (
                     userData.todos.map((el) => (
                         <div className={el.is_done ? 'taskDone myTasks' : 'myTasks'} key={el.id}>
                             {el.label}
+                            <div>
+                  <span
+                    className="fa-solid fa-check done"
+                  ></span>
+                  <span
+                    className="fa-solid fa-xmark delete"
+                  ></span>
+                  </div>
                         </div>
                     ))
                 ) : (
