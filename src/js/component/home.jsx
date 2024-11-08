@@ -5,7 +5,7 @@ const Home = () => {
     const [user, setUser] = useState('');
     const [userData, setUserData] = useState([]);
     const [task, setTask] = useState('');
-
+    const myUser = ''
     const createUser = async (user) => {
         try {
             const resp = await fetch(url + 'users/' + user, {
@@ -91,22 +91,21 @@ const Home = () => {
                 },
                 body: JSON.stringify({
                     "label": task.label,
-                    "is_done": true,
+                    "is_done": !task.is_done,
                 })
             });
             if (!resp.ok) throw new Error('Error al eliminar la tarea del servidor');
-           getData()
+           getData(user)
         } catch (error) {
             console.error(error);
         }
     };
 
     return (
-        <div className="text-center mt-5">
+        <div className="myContainer">
          
             <form onSubmit={handleUserSubmit}>
                 <input type="text" placeholder="Type user name" value={user} onChange={e => setUser(e.target.value)} required />
-                <button type="submit">Create User</button>
             </form>
 
             <div>
