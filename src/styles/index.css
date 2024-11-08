@@ -16,6 +16,7 @@
   .taskDone{
    text-decoration: line-through #fadd8b;
   }
+  
   .delete, .done{
     margin-left: 2px;
   }

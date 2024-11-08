@@ -82,6 +82,25 @@ const Home = () => {
         }
     };
 
+    const handleDone = async (task) => {
+        try {
+            const resp = await fetch(url + 'todos/' + task.id, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "label": task.label,
+                    "is_done": true,
+                })
+            });
+            if (!resp.ok) throw new Error('Error al eliminar la tarea del servidor');
+           getData()
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <div className="text-center mt-5">
          
@@ -103,12 +122,12 @@ const Home = () => {
             <ul className="myUl">
                 {userData.todos ? (
                     userData.todos.map((el) => (
-                        <div className={el.is_done ? 'taskDone myTasks' : 'myTasks'} key={el.id}>
+                        <div className={el.is_done? 'taskDone myTasks' : 'myTasks'} key={el.id}>
                             {el.label}
                             <div>
                   <span
                     className="fa-solid fa-check done"
-                    
+                    onClick={() => handleDone(el)}
                   ></span>
                   <span
                     className="fa-solid fa-xmark delete"
